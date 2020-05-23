@@ -1,9 +1,10 @@
-package pglp.pglp52;
+package pglp.pglp_52;
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class Personnels implements InterfacePersonnels,Serializable{
 	
@@ -14,11 +15,25 @@ public class Personnels implements InterfacePersonnels,Serializable{
 	public int getIdPersonnels() {
 		return IdPersonnels;
 	}
+	public int idGRP;
+	public int getIdGRP() {
+		return idGRP;
+	}
+	public void setIdGRP(int idGRP) {
+		this.idGRP = idGRP;
+	}
+	public LocalDate getDate() {return dateDeNaissance;}
+	public String IDPersoToString() {
+		return Integer.toString(IdPersonnels);
+	}
 	public void setIdPersonnels(int idPersonnels) {
 		this.IdPersonnels = idPersonnels;
 	}
 	public String getNom() {
 		return Nom;
+	}
+	public void AddNum(String tel) {
+		Tel.add(tel);
 	}
 	public void setNom(String nom) {
 		this.Nom = nom;
@@ -29,10 +44,10 @@ public class Personnels implements InterfacePersonnels,Serializable{
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public ArrayList<Integer> getTel() {
+	public ArrayList<String> getTel() {
 		return Tel;
 	}
-	public void setTel(ArrayList<Integer> tel) {
+	public void setTel(ArrayList<String> tel) {
 		this.Tel = tel;
 	}
 	/**
@@ -42,40 +57,54 @@ public class Personnels implements InterfacePersonnels,Serializable{
 	int IdPersonnels;
 	String Nom;
 	String prenom;
-	Date dateDeNaissance;
-	ArrayList<Integer>Tel;
+	LocalDate dateDeNaissance;
+	ArrayList<String> Tel;
 	public Personnels(Builder builder) {
 		IdPersonnels=builder.IdPersonnels;
 		Nom=builder.Nom;
 		prenom=builder.prenom;
 		dateDeNaissance=builder.dateDeNaissance;
 		Tel=builder.Tel;
-		
+		idGRP=builder.idGRP;
 	}
 	public void afficher() {
-		System.out.println("lidentifiant de personelle:"+IdPersonnels);
+		System.out.println(" personnelle:"+IdPersonnels);
 		
 	}
 	public static class Builder{
 		
 
+		public int idGRP;
 		private final int IdPersonnels;
 		private final String Nom;
 		private final String prenom;
-		Date dateDeNaissance;
-		ArrayList<Integer>Tel=new ArrayList<Integer>();
+		LocalDate dateDeNaissance;
+		ArrayList<String>Tel=new ArrayList<String>();
 		
-		public Builder(int IdPersonnels,String Nom,String prenom ) 
+		public Builder(int IdPersonnels,String Nom,String prenom ,LocalDate localDate) 
 		{
 			this.IdPersonnels=IdPersonnels;
 			this.Nom=Nom;
 			this.prenom=prenom;
-			this.dateDeNaissance=dateDeNaissance;
+			this.dateDeNaissance=localDate;
+			this.idGRP=IdPersonnels;
+		}
+		public int getIdGRP() {
+			return idGRP;
+		}
+		public void setIdGRP(int idGRP) {
+			this.idGRP = idGRP;
+		}
+		public Builder TEL(ArrayList<String> Tel ) 
+		{
+			this.Tel=Tel;
+			return this;
+			
 			
 		}
-		public Builder TEL(Integer tel) 
+		public Builder GRP(int idGRP ) 
 		{
-			this.Tel.add(tel);
+			this.idGRP=idGRP;
 			return this;
 			
 			

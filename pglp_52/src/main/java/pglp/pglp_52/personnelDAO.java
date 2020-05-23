@@ -1,4 +1,4 @@
-package pglp.pglp52;
+package pglp.pglp_52;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -159,6 +159,11 @@ Allpersonnelles = (ArrayList<Personnels>) ois.readObject();
 	         }
 		
 		return -1;
+	}
+
+	public Personnels find(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
