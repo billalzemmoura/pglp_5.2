@@ -1,4 +1,4 @@
-package pglp.pglp52;
+package pglp.pglp_52;
 
 import java.util.ArrayList;
 
