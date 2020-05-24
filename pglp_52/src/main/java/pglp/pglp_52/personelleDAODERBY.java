@@ -21,7 +21,7 @@ public class personelleDAODERBY implements DAO<Personnels>{
             + "NAME VARCHAR(45) NOT NULL,"
             + "DOB DATE NOT NULL,"
             + "FNAME VARCHAR(45) NOT NULL ,"
-            + "GRP_ID INT NOT NULL,"
+            + "GRP_ID INT,"
             + "FOREIGN KEY (GRP_ID) REFERENCES databaseDAO.GROUPE(GRP_ID),"
             + "PRIMARY KEY (EMP_ID ))";
 
@@ -79,9 +79,11 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 	        }
 	    }
 
+		@SuppressWarnings("null")
 		public Personnels create(Personnels obj)
 				throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 			try {
+				if (obj!=null) {
 				connect = DriverManager.getConnection("jdbc:derby:databaseDAO;create=true");
 				
 				Personnels p=find(obj.getIdPersonnels());
@@ -95,14 +97,19 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 				prepare.setString(2, obj.getNom());
 				prepare.setString(3, obj.getPrenom());
 				prepare.setDate(4, (Date.valueOf(obj.getDate())));
-				prepare.setInt(5, obj.getIdGRP());
+				if (obj.getIdGRP()==-1) {
+				prepare.setInt(5, (Integer) null);}
+				else {
+					prepare.setInt(5, obj.getIdGRP());
+				}
 				int result=prepare.executeUpdate();
                 if (obj.getTel().size()>0) {
 					insertNUM(obj);
 				}
 				assert result==1;
 				close();}
-			} catch (SQLException e) {
+				}
+				} catch (SQLException e) {
 			e.printStackTrace();
 			}
 			
@@ -217,6 +224,9 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 		}
 		public Personnels delete( Personnels obj) {
 			try {
+				if (obj!=null) {
+					
+				
 				connect = DriverManager.getConnection("jdbc:derby:databaseDAO;create=true");
 				
 				Personnels p=find(obj.getIdPersonnels());
@@ -229,9 +239,10 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 				PreparedStatement prepare2 =connect.prepareStatement("DELETE FROM  databaseDAO.PERSONELLE WHERE EMP_ID=?");
 				prepare2.setInt(1,  obj.getIdPersonnels());
 				int result2=prepare2.executeUpdate();
-				assert result==1;
+				assert result2==1;
 				close();}
-			} catch (SQLException e) {
+				}
+				} catch (SQLException e) {
 			e.printStackTrace();
 			}
 			

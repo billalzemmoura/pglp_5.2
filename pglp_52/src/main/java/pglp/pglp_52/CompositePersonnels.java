@@ -20,6 +20,7 @@ public void setPersonelles(ArrayList<InterfacePersonnels> personelles) {
 	this.personelles = personelles;
 }
 private int  IdGroupe;
+private int  IdGroupePere;
  public CompositePersonnels(int IdGroupe ) {
 	 this.IdGroupe=IdGroupe;
 	 
@@ -45,9 +46,12 @@ private int  IdGroupe;
 	  
   }
   public void remove(InterfacePersonnels ajouter ) {
-	if (ajouter instanceof Personnels) 
+	if (ajouter instanceof Personnels) {
 		((Personnels) ajouter).idGRP=-1;
+	}else {
 	((CompositePersonnels)ajouter).IdGroupe=-1;  
+	}
+	
 	personelles.remove(ajouter);
 	  
   }

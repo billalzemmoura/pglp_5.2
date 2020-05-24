@@ -22,7 +22,7 @@ public class CompositeDaoDerby implements DAO<CompositePersonnels> {
             + "NAME VARCHAR(45) NOT NULL,"
             + "DOB DATE NOT NULL,"
             + "FNAME VARCHAR(45) NOT NULL ,"
-            + "GRP_ID INT NOT NULL,"
+            + "GRP_ID INT ,"
             + "FOREIGN KEY (GRP_ID) REFERENCES databaseDAO.GROUPE(GRP_ID),"
             + "PRIMARY KEY (EMP_ID ))";
 
@@ -109,7 +109,7 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 	 				DAO<Personnels> pDaoDerby=DAOFactory.getPersonnelDaoDerby();
 	 				connect = DriverManager.getConnection("jdbc:derby:databaseDAO;create=true");
 	 				CompositePersonnels p=null;
-	 				
+	 				System.out.println(obj.getIDGroupe());
 		 			p=find(obj.getIDGroupe());						
 					
 
@@ -120,6 +120,7 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 	 				PreparedStatement prepare =connect.prepareStatement("INSERT INTO databaseDAO.GROUPE ( GRP_ID) VALUES (?)");	 				
 	 				prepare.setInt(1, obj.getIDGroupe());
                     prepare.executeUpdate();
+                  
 	 				for (int i = 0; i < obj.getPersonelles().size(); i++) {
 	 					if (obj.getPersonelles().get(i) instanceof Personnels) {
 	 						pDaoDerby.create((Personnels) obj.getPersonelles().get(i));
@@ -202,6 +203,10 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 			}
 	public CompositePersonnels update(CompositePersonnels obj) {
 		CompositePersonnels resutatUpdated =null;
+		
+		if (obj!=null) {
+			
+		
 		if (find(obj.getIDGroupe())!=null) {
 			
 		
@@ -223,9 +228,23 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 			e.printStackTrace();
 		}
 		}else {
-			
+			try {
+				create(obj);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("le tuple n'existe pas ");
-		}
+		}}
 		
 		return resutatUpdated;
 	}
@@ -233,6 +252,10 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 	
 		public CompositePersonnels delete(CompositePersonnels obj) {
 			try {
+			if (obj !=null) {
+				
+			
+				
 				DAO<Personnels> pDaoDerby=DAOFactory.getPersonnelDaoDerby();
 				
 				CompositePersonnels p=find(obj.getIDGroupe());
@@ -263,7 +286,7 @@ private static final String CREATE_TABLE_SQL2="CREATE  TABLE databaseDAO.Telepho
 
 				
 				
-				
+				}	
 				}
 			} catch (SQLException e) {
 			e.printStackTrace();
