@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun May 24 23:54:56 CEST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0172-48ae-84bb-0000038b4d30 
+on database directory /home/bill/Bureau/etude S2/prog/pglp_5.2/pglp_52/databaseDAO with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@3d4eac69 
+Loaded from file:/home/bill/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=Ubuntu
+java.runtime.version=11.0.7+10-post-Ubuntu-3ubuntu1
+user.dir=/home/bill/Bureau/etude S2/prog/pglp_5.2/pglp_52
+os.name=Linux
+os.arch=amd64
+os.version=5.4.0-31-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
